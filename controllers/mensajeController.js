@@ -18,6 +18,30 @@ const obtenerMensajes = async (req, res) => {
     }
 };
 
+// Obtener mensaje por ID
+const obtenerMensajePorId = async (req, res) => {
+    try {
+        const mensaje = await Mensaje.findById(req.params.id);
+
+        if (!mensaje) {
+            return res.status(404).json({
+                mensaje: 'Mensaje no encontrado'
+            });
+        }
+
+        res.status(200).json({
+            mensaje: 'Mensaje obtenido correctamente',
+            datos: mensaje
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            mensaje: 'Error al obtener el mensaje',
+            error: error.message
+        });
+    }
+};
+
 // Crear un mensaje
 const crearMensaje = async (req, res) => {
     try {
@@ -93,6 +117,7 @@ const eliminarMensaje = async (req, res) => {
 
 module.exports = {
     obtenerMensajes,
+    obtenerMensajePorId,
     crearMensaje,
     actualizarMensaje,
     eliminarMensaje

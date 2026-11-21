@@ -3,12 +3,15 @@ const router = express.Router();
 
 const {
     obtenerUsuarios,
+    obtenerUsuarioPorId,
     crearUsuario,
     actualizarUsuario,
     eliminarUsuario
 } = require('../controllers/usuarioController');
 
 router.get('/', obtenerUsuarios);
+
+router.get('/:id', obtenerUsuarioPorId);
 
 router.post('/', crearUsuario);
 

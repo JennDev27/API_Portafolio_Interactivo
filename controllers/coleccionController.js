@@ -18,6 +18,30 @@ const obtenerColecciones = async (req, res) => {
     }
 };
 
+// Obtener colección por ID
+const obtenerColeccionPorId = async (req, res) => {
+    try {
+        const coleccion = await Coleccion.findById(req.params.id);
+
+        if (!coleccion) {
+            return res.status(404).json({
+                mensaje: 'Colección no encontrada'
+            });
+        }
+
+        res.status(200).json({
+            mensaje: 'Colección obtenida correctamente',
+            datos: coleccion
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            mensaje: 'Error al obtener la colección',
+            error: error.message
+        });
+    }
+};
+
 // Crear colección
 const crearColeccion = async (req, res) => {
     try {
@@ -93,6 +117,7 @@ const eliminarColeccion = async (req, res) => {
 
 module.exports = {
     obtenerColecciones,
+    obtenerColeccionPorId,
     crearColeccion,
     actualizarColeccion,
     eliminarColeccion

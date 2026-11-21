@@ -3,6 +3,7 @@ const router = express.Router();
 
 const {
     obtenerMensajes,
+    obtenerMensajePorId,
     crearMensaje,
     actualizarMensaje,
     eliminarMensaje
@@ -10,6 +11,8 @@ const {
 
 
 router.get('/', obtenerMensajes);
+
+router.get('/:id', obtenerMensajePorId);
 
 router.post('/', crearMensaje);
 

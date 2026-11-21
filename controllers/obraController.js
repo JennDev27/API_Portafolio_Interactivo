@@ -18,6 +18,30 @@ const obtenerObras = async (req, res) => {
     }
 };
 
+// Obtener obra por ID
+const obtenerObraPorId = async (req, res) => {
+    try {
+        const obra = await Obra.findById(req.params.id);
+
+        if (!obra) {
+            return res.status(404).json({
+                mensaje: 'Obra no encontrada'
+            });
+        }
+
+        res.status(200).json({
+            mensaje: 'Obra obtenida correctamente',
+            datos: obra
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            mensaje: 'Error al obtener la obra',
+            error: error.message
+        });
+    }
+};
+
 // Crear obra
 const crearObra = async (req, res) => {
     try {
@@ -93,6 +117,7 @@ const eliminarObra = async (req, res) => {
 
 module.exports = {
     obtenerObras,
+    obtenerObraPorId,
     crearObra,
     actualizarObra,
     eliminarObra

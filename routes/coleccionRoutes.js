@@ -3,12 +3,15 @@ const router = express.Router();
 
 const {
     obtenerColecciones,
+    obtenerColeccionPorId,
     crearColeccion,
     actualizarColeccion,
     eliminarColeccion
 } = require('../controllers/coleccionController');
 
 router.get('/', obtenerColecciones);
+
+router.get('/:id', obtenerColeccionPorId);
 
 router.post('/', crearColeccion);
 
